@@ -2,7 +2,8 @@
   "name": "react-hooks",
   "version": "0.0.0",
   "description": "常用的react hooks实现",
-  "main": "index.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
   "scripts": {
     "test": "jest",
     "build": "rollup -c rollup.config.ts"
