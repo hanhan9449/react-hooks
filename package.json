@@ -1,5 +1,5 @@
 {
-  "name": "react-hooks",
+  "name": "@hanhan9449/react-hooks",
   "version": "0.0.0",
   "description": "常用的react hooks实现",
   "main": "dist/index.cjs",
