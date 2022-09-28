@@ -1,0 +1,6 @@
+/src
+**/*.spec.*
+.github
+.idea
+*.config.*
+tsconfig.json
