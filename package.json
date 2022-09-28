@@ -1,15 +1,15 @@
 {
   "name": "react-hooks",
   "version": "0.0.0",
-  "description": "",
+  "description": "常用的react hooks实现",
   "main": "index.js",
   "scripts": {
     "test": "jest",
     "build": "rollup -c rollup.config.ts"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["react", "hooks", "utils"],
+  "author": "hanhan9449<haannn@qq.com>",
+  "license": "MIT",
   "dependencies": {
     "tslib": "^2.4.0"
   },
