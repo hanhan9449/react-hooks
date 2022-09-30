@@ -76,4 +76,19 @@ describe('trace util testing suite', function () {
         expect(ms).toBeGreaterThanOrEqual(N - 1)
 
     })
+
+    test('promise work nice', async () => {
+        const N = 1000
+        const promise = (async  () => {
+            await wait(N)
+            return true
+        })()
+        expect(promise).toBeInstanceOf(Promise)
+        const result = await trace(promise, 'promise')
+        expect(result).toBe(true)
+        expect(recordMap.size).toBe(1)
+        const [name, ms] = Array.from(recordMap.entries())[0]
+        expect(name).toBe(geneLabel('promise'))
+        expect(ms).toBeGreaterThanOrEqual(N - 1)
+    })
 });
