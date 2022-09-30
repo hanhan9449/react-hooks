@@ -17,19 +17,19 @@ export function geneLabel(name: string): string {
 export function trace<T extends AnyFn>(fn: T, name?: string): T {
     const label = geneLabel(name || fn.name)
     return function(...args: Parameters<T>) {
-        console.time(label)
+        const start = performance.now()
         const result = fn(...args) as ReturnType<T>
         // @ts-ignore if result is primitive return false, no error
         if (result instanceof Promise) {
             return result.then(result => {
-                console.timeEnd(label)
+                console.log(label, performance.now() - start)
                 return result
             }).catch(err => {
-                console.timeEnd(label)
+                console.log(label, performance.now() - start)
                 return err
             })
         } else {
-            console.timeEnd(label)
+            console.log(label, performance.now() - start)
             return result
         }
     }  as T
