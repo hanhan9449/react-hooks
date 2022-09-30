@@ -15,6 +15,8 @@ export function trace<T extends Promise<any>>(promise: T, name?: string): T;
 // eslint-disable-next-line no-redeclare,no-unused-vars
 export function trace<T extends AnyFn>(fn: T, name?: string): T;
 /**
+ * 用于追踪function、async function、Promise运行时间
+ *
  * @publicApi
  * @param fn
  * @param name
