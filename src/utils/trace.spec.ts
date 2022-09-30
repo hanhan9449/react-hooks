@@ -74,7 +74,23 @@ describe('trace util testing suite', function () {
         const [name, ms] = Array.from(recordMap.entries())[0]
         expect(name).toBe(geneLabel('afn'))
         expect(ms).toBeGreaterThanOrEqual(N - 1)
+    })
 
+    test('async function throw error', async () => {
+        const N = 1000
+        const error = new Error('error')
+        async function afn() {
+            await wait(N)
+            throw error
+        }
+        const promiseResult = trace(afn)()
+        expect(promiseResult).toBeInstanceOf(Promise)
+        const result = await promiseResult
+        expect(result).toBe(error)
+        expect(recordMap.size).toBe(1)
+        const [name, ms] = Array.from(recordMap.entries())[0]
+        expect(name).toBe(geneLabel('afn'))
+        expect(ms).toBeGreaterThanOrEqual(N - 1)
     })
 
     test('promise work nice', async () => {
@@ -86,6 +102,22 @@ describe('trace util testing suite', function () {
         expect(promise).toBeInstanceOf(Promise)
         const result = await trace(promise, 'promise')
         expect(result).toBe(true)
+        expect(recordMap.size).toBe(1)
+        const [name, ms] = Array.from(recordMap.entries())[0]
+        expect(name).toBe(geneLabel('promise'))
+        expect(ms).toBeGreaterThanOrEqual(N - 1)
+    })
+
+    test('promise throw error', async () => {
+        const N = 1000
+        const error = new Error('error')
+        const promise = (async () => {
+            await wait(N)
+            throw error
+        })()
+        expect(promise).toBeInstanceOf(Promise)
+        const result = await trace(promise, 'promise')
+        expect(result).toBe(error)
         expect(recordMap.size).toBe(1)
         const [name, ms] = Array.from(recordMap.entries())[0]
         expect(name).toBe(geneLabel('promise'))
