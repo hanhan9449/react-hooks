@@ -1,8 +1,8 @@
 # 常用react-hooks实现
 [![test status][test-status-image]][test-status-url]
+[![codecov](https://codecov.io/github/hanhan9449/react-hooks/branch/main/graph/badge.svg?token=r8VkjsvOm5)](https://codecov.io/github/hanhan9449/react-hooks)
 [![npm version][npm-version]][package-url]
 [![Downloads][downloads-image]][package-url]
-
 
 ## 特性
 - typescript实现
