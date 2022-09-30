@@ -2,31 +2,19 @@ import {geneLabel, trace} from "./trace";
 import {wait} from "./wait";
 
 describe('trace util testing suite', function () {
-    const recordMap = new Map<string, [number, number]>()
+    const recordMap = new Map<string, number>()
 
-    function mockTime(label: string) {
-        const tuple = recordMap.get(label) ?? [] as any
-        tuple[0] = Date.now()
-        recordMap.set(label, tuple)
+    const originLog = console.log
+    function mockLog(label: string, ms: number) {
+        recordMap.set(label, ms)
     }
 
-    function mockTimeEnd(label: string) {
-        const tuple = recordMap.get(label) ?? [] as any
-        tuple[1] = Date.now()
-        recordMap.set(label, tuple)
-    }
-
-    const originTime = console.time
-    const originTimeEnd = console.timeEnd
     beforeEach(() => {
         recordMap.clear()
-        console.time = mockTime
-        console.timeEnd = mockTimeEnd
+        console.log = mockLog
     })
     afterEach(() => {
-        console.time = originTime
-        console.timeEnd = originTimeEnd
-
+        console.log = originLog
     })
     test('normal function work nice', () => {
         const N = 200
@@ -45,10 +33,9 @@ describe('trace util testing suite', function () {
         const result = trace(loop)()
         expect(result).toBe(true)
         expect(recordMap.size).toBe(1)
-        const tuple = Array.from(recordMap.values())[0]
-        const name = Array.from(recordMap.keys())[0]
+        const [name, ms] = Array.from(recordMap.entries())[0]
         expect(name).toBe(geneLabel('loop'))
-        expect(tuple[1] - tuple[0]).toBeGreaterThanOrEqual(N * M)
+        expect(ms).toBeGreaterThanOrEqual(N * M - 1)
     })
 
     test('anonymous function work nice', () => {
@@ -67,15 +54,15 @@ describe('trace util testing suite', function () {
         const result = trace(loop, 'anonymous function')()
         expect(result).toBe(true)
         expect(recordMap.size).toBe(1)
-        const tuple = Array.from(recordMap.values())[0]
-        const name = Array.from(recordMap.keys())[0]
+        const [name, ms] = Array.from(recordMap.entries())[0]
         expect(name).toBe(geneLabel('anonymous function'))
-        expect(tuple[1] - tuple[0]).toBeGreaterThanOrEqual(N * M)
+        expect(ms).toBeGreaterThanOrEqual(N * M - 1)
     })
 
     test('async function work nice', async () => {
+        const N = 1000
         async function afn() {
-            await wait(1000)
+            await wait(N)
             return true
         }
 
@@ -84,10 +71,9 @@ describe('trace util testing suite', function () {
         const result = await promiseResult
         expect(result).toBe(true)
         expect(recordMap.size).toBe(1)
-        const tuple = Array.from(recordMap.values())[0]
-        const name = Array.from(recordMap.keys())[0]
+        const [name, ms] = Array.from(recordMap.entries())[0]
         expect(name).toBe(geneLabel('afn'))
-        expect(tuple[1] - tuple[0]).toBeGreaterThanOrEqual(1000)
+        expect(ms).toBeGreaterThanOrEqual(N - 1)
 
     })
 });
