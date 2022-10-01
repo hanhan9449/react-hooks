@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import React, {FC, useState} from "react";
 import {act, render} from "@testing-library/react";
 import {useThrottle} from "./useThrottle";
 import {wait} from "../utils/wait";
@@ -6,7 +6,6 @@ import {wait} from "../utils/wait";
 describe('useThrottle hook testing suite', function () {
 
     test('throttle work nice', async () => {
-        // eslint-disable-next-line react/react-in-jsx-scope
         const component = render(<Test/>)
         const valueEl = await component.getByTestId('value')
         const buttonEl = await component.getByTestId('button')

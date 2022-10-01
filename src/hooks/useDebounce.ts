@@ -1,5 +1,5 @@
 import {debounce, DebounceSettings} from "lodash-es";
-import {useMemo, useRef} from "react";
+import {useMemo} from "react";
 import {AnyFn} from "../interfaces";
 import {useLatestFn} from "./useLatestFn";
 

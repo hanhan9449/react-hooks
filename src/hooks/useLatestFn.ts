@@ -1,5 +1,5 @@
 import {AnyFn} from "../interfaces";
-import {useCallback, useMemo, useRef} from "react";
+import {useCallback, useRef} from "react";
 
 export function useLatestFn<F extends AnyFn>(fn: F): F {
     const fnRef = useRef(fn)

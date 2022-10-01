@@ -1,6 +1,6 @@
 import {AnyFn} from "../interfaces";
 import {throttle, ThrottleSettings} from "lodash-es";
-import {useMemo, useRef} from "react";
+import {useMemo} from "react";
 import {useLatestFn} from "./useLatestFn";
 const throttleSettings: ThrottleSettings = {
     leading: true,

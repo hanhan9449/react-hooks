@@ -1,11 +1,10 @@
 import {useDebounce} from "./useDebounce";
-import {act, render, renderHook} from "@testing-library/react";
-import {FC, useState} from "react";
+import {act, render} from "@testing-library/react";
+import React, {FC, useState} from "react";
 import {wait} from "../utils/wait";
 
 describe('useDebounce hook testing suite', function () {
     test('debounce work nice', async () => {
-        // eslint-disable-next-line react/react-in-jsx-scope
         const component = render(<Test/>)
         const valueEl = await component.getByTestId('value')
         const buttonEl = await component.getByTestId('button')
