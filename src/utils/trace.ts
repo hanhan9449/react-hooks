@@ -1,6 +1,5 @@
 import {isPromise} from './is'
-// eslint-disable-next-line no-unused-vars
-type AnyFn = (...args: any[]) => any
+import {AnyFn} from "../interfaces";
 
 /**
  * @internal

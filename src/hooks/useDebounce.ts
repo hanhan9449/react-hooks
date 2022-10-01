@@ -1,19 +1,19 @@
 import {debounce, DebounceSettings} from "lodash-es";
 import {useMemo, useRef} from "react";
+import {AnyFn} from "../interfaces";
+import {useLatestFn} from "./useLatestFn";
 
-const defaultDebounceSettings: DebounceSettings = {
-    leading: true,
-    trailing: false,
+const debounceSettings: DebounceSettings = {
+    leading: false,
+    trailing: true,
 }
-// eslint-disable-next-line no-unused-vars
-type AnonymousFn = (...args: any[]) => any;
 
-export function useDebounce<F extends AnonymousFn>(fn: F, ms: number, options = defaultDebounceSettings) {
-    const fnRef = useRef(fn)
-    fnRef.current = fn
-    function dummyFn(...args: Parameters<F>) {
-        return fnRef.current(...args) as ReturnType<F>
-
-    }
-    return useMemo(() => debounce(dummyFn, ms, options), [ms])
+/**
+ * @publicApi
+ * @param fn
+ * @param ms
+ */
+export function useDebounce<F extends AnyFn>(fn: F, ms: number) {
+    const latestFn = useLatestFn(fn)
+    return useMemo(() => debounce(latestFn, ms, debounceSettings), [ms])
 }
