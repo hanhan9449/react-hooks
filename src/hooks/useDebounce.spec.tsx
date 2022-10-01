@@ -31,7 +31,9 @@ const Test: FC = () => {
     const [value, setValue] = useState(0)
     function updateValue() {
         act(() => {
-            setValue(p => p + 1)
+            // 函数直接使用state值的场景
+            // value仍然能取到最新的值
+            setValue(value + 1)
         })
     }
     const debouncedUpdateValue = useDebounce(updateValue, 1000)
