@@ -3,6 +3,7 @@
 [![codecov](https://codecov.io/github/hanhan9449/react-hooks/branch/main/graph/badge.svg?token=r8VkjsvOm5)](https://codecov.io/github/hanhan9449/react-hooks)
 [![npm version][npm-version]][package-url]
 [![Downloads][downloads-image]][package-url]
+[![license][license-image]][license-url]
 
 ## 特性
 - typescript实现
@@ -14,10 +15,14 @@
 ### utils
 
 - [trace.ts](src/utils/trace.ts) 追踪函数、promise的运行时间
+- [is.ts](src/utils/is.ts) 具有类型guard的判断函数
 
 ### hooks
 
 - [useHelloWorld.ts](src/hooks/useHelloWorld.ts) 测试函数库工作正常
+- [useLatestFn.ts](src/hooks/useLatestFn.ts) 即使在useMemo闭包中，也始终使用最新的fn
+- [useDebounce.ts](src/hooks/useDebounce.ts) 小而美的debounce hook实现
+- [useThrottle.ts](src/hooks/useThrottle.ts) 小而美的throttle hook实现
 
 
 

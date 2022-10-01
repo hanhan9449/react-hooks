@@ -6,6 +6,9 @@ const config: Config = {
     coverageReporters: [
         "text",
         "cobertura"
+    ],
+    transformIgnorePatterns: [
+        '/node_modules/(?!lodash-es)'
     ]
 }
 export default config;

@@ -1,2 +1,7 @@
 export * from './hooks/useHelloWorld'
+export * from './hooks/useThrottle'
+export * from './hooks/useDebounce'
+export * from './hooks/useLatestFn'
 export * from './utils/trace'
+export * from './utils/wait'
+export * from './utils/is'
